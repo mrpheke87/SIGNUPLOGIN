@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+      function AddRow()
+    {
+      var usernamee = document.getElementById("usernamee").value;
+      var passwordd = document.getElementById("passwordd").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+      if (usernamee==""|| passwordd==""|| email==""|| phone=="") {
+        return false;
+      }
+      else {
+      google.script.run.AddRecord(usernamee,passwordd,email,phone);
+      document.getElementById("jnc2_id1").className = "jnc2_id1-off";
+      document.getElementById("jnc3_id1").className = "jnc3_id1";
+     }
+    }
+
+     function LoginUser()
+    {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    google.script.run.withSuccessHandler(function(output) 
+    {
+      if(output == 'TRUE')
+      {
+         var url1 ='https://t1js5pdwdqczrcuosbwpjq-on.drv.tw/PPDBTEST/';
+         var winRef = window.open(url1);
+         winRef ? google.script.host.close() : window.onload=function(){document.getElementById('url').href = url1;}    
+      }
+      else if(output == 'FALSE')
+      {
+        document.getElementById("errorMessage").innerHTML = "Data tidak valid!";     
+      }    
+    }).checkLogin(username, password);
+    }
+    
+function function1(){
+    document.getElementById("jnc1_id1").className = "jnc1_class1-off";
+    document.getElementById("jnc2_id1").className = "jnc2_id1";
+}
+ 
+function function3(){ 
+  document.getElementById("jnc3_id1").className = "jnc3_id1-off";
+  document.getElementById("jnc1_id1").className = "jnc1_id1"; 
+}
+
+  </script>
+  <style>
+body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#000252;
+}
+.jnc1_class1 input {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e7e7e7;
+    padding: 10px 80px;
+    font-size: 1rem;
+    border-radius: 30px;
+    background:#fff;
+    outline: none;
+    transition: .3s;
+    color: #fff;
+}
+@media (max-width: 430px) {
+    .container {
+        width: 300px;
+    }
+    .container input{
+        display: block;
+    }
+}
+/*page1*/
+.jnc1_class1-off{
+    display: none;
+  }
+
+
+/*page2*/
+.jnc2_class1{
+    display: none;
+  }
+
+.jnc2_id1-off{
+    display:none;
+}
+
+/*page3*/
+.jnc3_class1{
+    display:none;
+
+}
+.jnc3_id1-off{
+    display:none;
+}
+
+
+input[type=text]:hover{
+        border-bottom:2px solid black;
+      }
+input[type=number]:hover{
+        border-bottom:2px solid black;
+      }
+input[type=password]:hover{
+        border-bottom:2px solid black;
+      }
+
+
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+<!--jnc1-->
+<center>
+    <div class="container">
+ <div class="jnc1_class1" id="jnc1_id1" style="background-color:#2e0009;border:2px solid gray;border-radius: 10px;width: 250px;margin-top: 0px;padding-bottom: 10px;padding-left: 20px;padding-right: 20px;margin-top: 5%;color: #fff;"> 
+    <h1>Login</h1>
+    <input type="text" id="username" placeholder="Username"  style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;width: 50%;font-weight:bold;padding: 10px;padding-left: 50px;padding-right: 50px;   border-radius: 30px;color: #000;"/><br>
+    <br>
+    <input type="password" id="password" placeholder="Password"  style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;width: 50%;font-weight:bold;padding: 10px;padding-left: 50px;padding-right: 50px;   border-radius: 30px;color: #000;"/><br>
+    <br><span id="errorMessage" style="color: red" ></span>
+
+    <input type="submit" value="LOGIN" onclick="LoginUser()"   style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;font-weight:bold;width: 80%;padding: 10px;padding-left: 50px;padding-right: 50px;   border-radius: 30px;background-color:#005c01;color: #fff;"/><br>
+    <br>
+    <b>Jika belum terdaftar,</b><br><br><input type="button" onClick="function1()" value="Daftar di sini"  style="border-top: none;border-right: none;border-left: none;outline: none;width: 80%; text-align: center;font-size:0.9em ;font-weight:bold;padding: 10px;padding-left: 50px;padding-right: 50px;border-radius: 30px;background-color:#001594;color:#fff"/>
+</div>
+</div>
+<!--jnc2-->
+<div class="jnc2_class1" id="jnc2_id1" style="background-color:#000c75;border:2px solid gray;border-radius: 20px;width: 250px;padding-top: 10px;padding-bottom: 20px;padding-left: 20px;padding-right: 20px;margin-top: 10%;color: #fff;">
+ <h1>DAFTAR</h1>
+    <input type="text" id="usernamee" placeholder="Username" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;width: 50%;font-weight:bold;padding: 5px;padding-left: 50px;padding-right: 50px;   border-radius: 30px;"/><br>
+    <br>
+    <input type="password" id="passwordd" placeholder="Buat password" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;width: 50%;font-weight:bold;padding: 5px;padding-left: 50px;padding-right: 50px;   border-radius: 30px;"/><br>
+        <br>
+    <input type="text" id="email" placeholder="Email" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;width: 50%;font-weight:bold;padding: 5px;padding-left: 50px;padding-right: 50px;   border-radius: 30px;"/><br>
+    <br>
+    <input type="number" id="phone" placeholder="Nomor telepon" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;width: 50%;font-weight:bold;padding: 5px;padding-left: 50px;padding-right: 50px;   border-radius: 30px;"/><br><br>
+    <b style="color:yellow;">Password harus kombinasi huruf dan angka.</b><br><br>
+    <input type="submit" value="Daftar" onclick="AddRow()" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;font-weight:bold;width: 80%;padding: 10px;padding-left: 50px;padding-right: 50px;   border-radius: 30px;background-color:#005c01;color: #fff;"/>
+    <br>
+</div>
+
+<!--jnc3-->
+ <div class="jnc3_class1" id="jnc3_id1"style="background-color:#000c75;border:2px solid gray;border-radius: 20px;width: 250px;padding-top: 10px;padding-bottom: 20px;padding-left: 20px;padding-right: 20px;margin-top: 10%;color: #fff;"><center>
+    <h2> Anda berhasil mendaftar.Silahkan login!</h2>
+    <input type="submit"  onClick="function3()" value="Login"  style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;font-weight:bold;width: 80%;padding: 10px;padding-left: 50px;padding-right: 50px;   border-radius: 30px;background-color:#005c01;color: #fff;"/><br>
+ </div> 
+</center>
+ </body>
+</html>
